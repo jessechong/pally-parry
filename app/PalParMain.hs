@@ -30,7 +30,7 @@ main = do args <- getArgs
       | any (\w -> not (isLower w)) word = do
         die $ "Input word must consist of all lowercase alphabetical characters"
       | mode == "s" = do
-        let result = palParSequential word 2
+        let result = palParSequential word 1
         putStrLn (show result)
       | mode == "p" = do
         let result = palParParallel word 0 ((length word) - 1)

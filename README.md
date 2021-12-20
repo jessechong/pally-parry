@@ -33,3 +33,5 @@ References:
     - https://caiorss.github.io/Functional-Programming/haskell/UnitTest_Hunit.html#sec-1-3
   - Cabal FAQ for debugging dependency issues.
     - https://www.haskell.org/cabal/FAQ.html
+  - StackOverflow discussion on threading.
+    - https://stackoverflow.com/questions/62641707/what-is-ghc-doing-when-run-with-n-parallel-flag
