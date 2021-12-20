@@ -1,37 +1,35 @@
-# PalPar-jlc2332
+# PalPar-jlc2332  
 
-Name: Jesse Chong
-Uni: jlc2332
-Final Project: Palindrome Partitioning (PalPar)
+Name: Jesse Chong  
+Uni: jlc2332  
+Final Project: Palindrome Partitioning (PalPar)  
 
-Hello, this is the readme file for my project "Palindrome Partitioning" or in short "PalPar".
-This project structure was created as per the Stack Quick Start Guide: https://docs.haskellstack.org/en/stable/README/#start-your-new-project
+Hello, this is the readme file for my final project "Palindrome Partitioning" or in short "PalPar". This project was for Professor Edwards' COMS W4995 Parallel Functional Programming.  
 
-This is the file structure of this project: (TODO)
--- PalParFinalProject
----- README
----- palPar.hs
----- palParTest.hs
----- Tests
------- ValidCases
--------- <...various valid test cases saved as .txt files...>
------- InvalidCases
--------- <...various invalid test cases saved as .txt files...>
+Commands to run:  
+`stack build`  
+`stack test`  
+`stack exec PalPar-jlc2332-exe ./test/ValidCases/small2.txt p`  
+`stack exec PalPar-jlc2332-exe ./test/ValidCases/small2.txt p -- +RTS -ls -N2`  
+`threadscope PalPar-jlc2332-exe.eventlog`  
 
-(TODO)
-"palPar.hs" is the main file which contains the logic for this project.
-"palParTest.hs" is an HUnit testing file used to thoroughly test various cases.
+Special thanks to Professor Edwards for the class and to Max Helman for TA'ing me over the project. I had a lot of fun learning about Haskell and working on the homeworks!  
 
-Please see either file for a more detailed description, instructions to run the file itself,
-and the references used for the code written in that file.
-
-Special thanks to Professor Edwards for the class and to Max Helman for TA'ing me over the project.
-I had a lot of fun learning about Haskell and working on the homeworks.
-
-
-References:
-  - https://leetcode.com/problems/palindrome-partitioning-ii/
-  - https://www.geeksforgeeks.org/palindrome-partitioning-dp-17/
-  - https://docs.haskellstack.org/en/stable/README/#start-your-new-project
-  - IO Lecture - http://www.cs.columbia.edu/~sedwards/classes/2021/4995-fall/io.pdf
-  - HUnit guide - https://caiorss.github.io/Functional-Programming/haskell/UnitTest_Hunit.html#sec-1-3
+References:  
+  - Course lectures:
+    - http://www.cs.columbia.edu/~sedwards/classes/2021/4995-fall/io.pdf
+    - http://www.cs.columbia.edu/~sedwards/classes/2021/4995-fall/laziness.pdf
+  - Class discussion board:
+    - https://edstem.org/us/courses/13664/discussion/948167
+  - Leetcode problem this project was based off of:
+    - https://leetcode.com/problems/palindrome-partitioning-ii/
+  - Referred to GeeksForGeeks Python and C++ implementations to write the algorithm used in this project. Verified that my code was working by comparing results of my program to the Python solution given in the GeeksForGeeks page.
+    - https://www.geeksforgeeks.org/palindrome-partitioning-dp-17/
+  - Referred to Haskell docs to create this project directory.
+    - https://docs.haskellstack.org/en/stable/README/#start-your-new-project
+  - General ThreadScope installation and usage.
+    - https://wiki.haskell.org/ThreadScope
+  - HUnit guide.
+    - https://caiorss.github.io/Functional-Programming/haskell/UnitTest_Hunit.html#sec-1-3
+  - Cabal FAQ for debugging dependency issues.
+    - https://www.haskell.org/cabal/FAQ.html

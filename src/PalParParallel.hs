@@ -11,12 +11,20 @@ module PalParParallel
     ( palParParallel
     ) where
 
+import Control.Parallel.Strategies
+
 palParParallel word l r
   | l >= r = 0
   | (isPalindrome word l r) == True = 0
-  | otherwise = minimum (map (\m -> palParLoop' word l m r) [l..(r - 1)])
+  | otherwise = minimum (parMap rpar (\m -> palParLoop' word l m r) [l..(r - 1)])
+
 
 palParLoop' word l m r = 1 + (palParParallel word l m) + (palParParallel word (m + 1) r)
+
+-- palParLoop' word l m r = parCall1 `par` parCall2 `pseq` parCall1 + parCall2 + 1
+--   where
+--     parCall1 = palParParallel word l m
+--     parCall2 = palParParallel word (m + 1) r
 
 isPalindrome word l r
   | l >= r                     = True
