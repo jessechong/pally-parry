@@ -1,4 +1,4 @@
-# jlc2332-COMSW4995-FinalProj-PalPar
+# PalPar-jlc2332
 
 Name: Jesse Chong
 Uni: jlc2332

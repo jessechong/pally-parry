@@ -1,6 +1,6 @@
-name:                jlc2332-COMSW4995-FinalProj-PalPar
+name:                PalPar-jlc2332
 version:             0.1.0.0
-github:              "githubuser/jlc2332-COMSW4995-FinalProj-PalPar"
+github:              "githubuser/PalPar-jlc2332"
 license:             BSD3
 author:              "Jesse Lin Chong"
 maintainer:          "jlc2332@columbia.edu"
@@ -17,7 +17,7 @@ extra-source-files:
 # To avoid duplicated efforts in documentation and dealing with the
 # complications of embedding Haddock markup inside cabal files, it is
 # common to point users to the README.md file.
-description:         Please see the README on GitHub at <https://github.com/githubuser/jlc2332-COMSW4995-FinalProj-PalPar#readme>
+description:         Please see the README on GitHub at <https://github.com/githubuser/PalPar-jlc2332#readme>
 
 dependencies:
 - base >= 4.7 && < 5
@@ -26,24 +26,26 @@ library:
   source-dirs: src
 
 executables:
-  jlc2332-COMSW4995-FinalProj-PalPar-exe:
+  PalPar-jlc2332-exe:
     main:                PalParMain.hs
     source-dirs:         app
     ghc-options:
+    - -Wall
     - -threaded
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
-    - jlc2332-COMSW4995-FinalProj-PalPar
+    - PalPar-jlc2332
 
 tests:
-  jlc2332-COMSW4995-FinalProj-PalPar-test:
+  PalPar-jlc2332-test:
     main:                PalParSpec.hs
     source-dirs:         test
     ghc-options:
     - -threaded
     - -rtsopts
     - -with-rtsopts=-N
+    - -Wall
     dependencies:
-    - jlc2332-COMSW4995-FinalProj-PalPar
+    - PalPar-jlc2332
     - HUnit

@@ -4,11 +4,11 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 
-name:           jlc2332-COMSW4995-FinalProj-PalPar
+name:           PalPar-jlc2332
 version:        0.1.0.0
-description:    Please see the README on GitHub at <https://github.com/githubuser/jlc2332-COMSW4995-FinalProj-PalPar#readme>
-homepage:       https://github.com/githubuser/jlc2332-COMSW4995-FinalProj-PalPar#readme
-bug-reports:    https://github.com/githubuser/jlc2332-COMSW4995-FinalProj-PalPar/issues
+description:    Please see the README on GitHub at <https://github.com/githubuser/PalPar-jlc2332#readme>
+homepage:       https://github.com/githubuser/PalPar-jlc2332#readme
+bug-reports:    https://github.com/githubuser/PalPar-jlc2332/issues
 author:         Jesse Lin Chong
 maintainer:     jlc2332@columbia.edu
 copyright:      2021 Jesse Lin Chong
@@ -21,42 +21,42 @@ extra-source-files:
 
 source-repository head
   type: git
-  location: https://github.com/githubuser/jlc2332-COMSW4995-FinalProj-PalPar
+  location: https://github.com/githubuser/PalPar-jlc2332
 
 library
   exposed-modules:
       PalParParallel
       PalParSequential
   other-modules:
-      Paths_jlc2332_COMSW4995_FinalProj_PalPar
+      Paths_PalPar_jlc2332
   hs-source-dirs:
       src
   build-depends:
       base >=4.7 && <5
   default-language: Haskell2010
 
-executable jlc2332-COMSW4995-FinalProj-PalPar-exe
+executable PalPar-jlc2332-exe
   main-is: PalParMain.hs
   other-modules:
-      Paths_jlc2332_COMSW4995_FinalProj_PalPar
+      Paths_PalPar_jlc2332
   hs-source-dirs:
       app
-  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  ghc-options: -Wall -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      base >=4.7 && <5
-    , jlc2332-COMSW4995-FinalProj-PalPar
+      PalPar-jlc2332
+    , base >=4.7 && <5
   default-language: Haskell2010
 
-test-suite jlc2332-COMSW4995-FinalProj-PalPar-test
+test-suite PalPar-jlc2332-test
   type: exitcode-stdio-1.0
   main-is: PalParSpec.hs
   other-modules:
-      Paths_jlc2332_COMSW4995_FinalProj_PalPar
+      Paths_PalPar_jlc2332
   hs-source-dirs:
       test
-  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N -Wall
   build-depends:
       HUnit
+    , PalPar-jlc2332
     , base >=4.7 && <5
-    , jlc2332-COMSW4995-FinalProj-PalPar
   default-language: Haskell2010

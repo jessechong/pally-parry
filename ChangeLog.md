@@ -1,3 +1,3 @@
-# Changelog for jlc2332-COMSW4995-FinalProj-PalPar
+# Changelog for PalPar-jlc2332
 
 ## Unreleased changes
