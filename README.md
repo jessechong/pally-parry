@@ -4,7 +4,7 @@ Name: Jesse Chong
 Uni: jlc2332
 Final Project: Palindrome Partitioning (PalPar)
 
-Hello, this is the readme file for my project "Palindrome Partitioning" or in short "PalPar".
+Hello this is the readme file for my project "Palindrome Partitioning" or in short "PalPar".
 This project structure was created as per the Stack Quick Start Guide: https://docs.haskellstack.org/en/stable/README/#start-your-new-project
 
 This is the file structure of this project: (TODO)
