@@ -7,35 +7,31 @@
 
 -}
 
-module PalParParallel
-    ( palParParallel
-    ) where
+module PalParParallel(palParParallel) where
+
+import PalParCommon(isPalindrome)
 
 import Control.Parallel(par, pseq)
-import Control.Parallel.Strategies(rdeepseq, parMap, parList, rpar, withStrategy, parListChunk, rseq, NFData, parBuffer)
+import Control.Parallel.Strategies(NFData, parBuffer, parList, parListChunk, parMap,
+                                   rdeepseq, rpar, rseq, withStrategy)
 
--- Set ver to a different integer to change what algorithm gets used.
+-- Set version to a different integer to change what algorithm gets used.
 palParParallel :: String -> String -> Int -> Int
-palParParallel word ver lenls
-  | ver == "1"  = palParParallel1 word 0 ((length word) - 1)
-  | ver == "2"  = palParParallel2 word 0 ((length word) - 1)
-  | ver == "3"  = palParParallel3 word 0 ((length word) - 1) lenls
-  | ver == "4"  = palParParallel4 word 0 ((length word) - 1) lenls
-  | ver == "5"  = palParParallel5 word 0 ((length word) - 1) 2
-  | ver == "6"  = palParParallel6 word 0 ((length word) - 1) 2
-  | ver == "7"  = palParParallel7 word 0 ((length word) - 1)
-  | ver == "8"  = palParParallel8 word 0 ((length word) - 1)
-  | ver == "9"  = palParParallel9 word 0 ((length word) - 1)
-  | ver == "10"  = palParParallel10 word 0 ((length word) - 1)
-  | ver == "11"  = palParParallel11 word 0 ((length word) - 1) 4
-  | ver == "12"  = palParParallel12 word 0 ((length word) - 1) 4
-  | ver == "13"  = palParParallel13 word 0 ((length word) - 1) 4
-  | otherwise = palParParallel1 word 0 ((length word) - 1)
-
-isPalindrome word l r
-  | l >= r                     = True
-  | (word !! l) /= (word !! r) = False
-  | otherwise                  = isPalindrome word (l + 1) (r - 1)
+palParParallel word version lenls
+  | version == "1"  = palParParallel1  word 0 ((length word) - 1)
+  | version == "2"  = palParParallel2  word 0 ((length word) - 1)
+  | version == "3"  = palParParallel3  word 0 ((length word) - 1) lenls
+  | version == "4"  = palParParallel4  word 0 ((length word) - 1) lenls
+  | version == "5"  = palParParallel5  word 0 ((length word) - 1) 2 -- <-- Change this last number to change depth
+  | version == "6"  = palParParallel6  word 0 ((length word) - 1) 2 -- <-- Change this last number to change depth
+  | version == "7"  = palParParallel7  word 0 ((length word) - 1)
+  | version == "8"  = palParParallel8  word 0 ((length word) - 1)
+  | version == "9"  = palParParallel9  word 0 ((length word) - 1)
+  | version == "10" = palParParallel10 word 0 ((length word) - 1)
+  | version == "11" = palParParallel11 word 0 ((length word) - 1) 4 -- <-- Change this last number to change depth
+  | version == "12" = palParParallel12 word 0 ((length word) - 1) 4 -- <-- Change this last number to change depth
+  | version == "13" = palParParallel13 word 0 ((length word) - 1) 4 -- <-- Change this last number to change depth
+  | otherwise       = palParParallel1  word 0 ((length word) - 1)
 
 -- Version 1
 -- One layer of parallelization

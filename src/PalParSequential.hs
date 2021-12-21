@@ -7,7 +7,8 @@
 
 -}
 
-module PalParSequential(palParSequential) where
+-- Exposing palParSequentialNaive/DP for testing purposes...
+module PalParSequential(palParSequential, palParSequentialNaive, palParSequentialDP) where
 
 import PalParCommon(isPalindrome)
 

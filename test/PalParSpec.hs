@@ -9,12 +9,21 @@
 
 import Test.HUnit
 
-testSum = TestCase $ assertEqual "Test 1" 15 (10 + 5)
-testPred = TestCase $ assertBool "10 > 5" (10 > 5)
+import PalParSequential(palParSequentialNaive)
+import PalParParallel(palParParallel)
 
-testlist = TestList [TestLabel "testSum" testSum,
-                     TestLabel "testPred" testPred
-                    ]
+
+readFileHelper' filename func = do
+  content <- readFile filename
+  let ls = lines content
+  return [16]
+
+testSequentialNaive1 = TestCase $ do
+  let actual   = readFileHelper' "./ValidCases/big1.txt" palParSequentialNaive
+      expected = [16]
+  assertEqual "Sequential Naive 1" actual expected
+
+testlist = TestList [TestLabel "testSequentialNaive1" testSequentialNaive1]
 
 main :: IO ()
 main = do

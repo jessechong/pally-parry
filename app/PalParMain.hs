@@ -16,9 +16,12 @@ import Data.Char(isLower)
 import System.Environment(getArgs, getProgName)
 import System.Exit(die)
 
+import Control.Parallel(par, pseq)
+import Control.Parallel.Strategies(NFData, parList, rdeepseq, rpar, rseq, withStrategy, usingIO)
+
 {- This program must be given:
 1. a path to a file of all lower case Strings
-2. a mode, "s" or "p"
+2. a mode, "s", "p1", "p2"
 3. and an algorithm version (see src .hs files for what versions there are to use) -}
 main :: IO ()
 main = do args <- getArgs
@@ -31,7 +34,6 @@ main = do args <- getArgs
               pn <- getProgName
               die $ "Usage: " ++ pn ++ " <filename> <mode> <version>"
   where
-
     {- palParWrapper' is the function that handles input validation
     before it passes the given args over to the actual processing functions
     such as palParSequential or palParParallel -}
@@ -43,8 +45,11 @@ main = do args <- getArgs
         die $ "Version must be within the valid range (check the Sequential and Parallel .hs files)"
       | mode == "s" = do
         mapM_ (\word -> putStrLn (show $ palParSequential word version)) ls
-      | mode == "p" = do
+      | mode == "p1" = do
         mapM_ (\word -> putStrLn (show $ palParParallel word version (length ls))) ls
+      | mode == "p2" = do
+        let p2result = parMapDeepSeq' (\word -> show $ palParParallel word version (length ls)) ls
+        mapM_ (\n -> putStrLn n) p2result
       | otherwise = do
         die $ "Mode must either be sequential 's' or parallel 'p'"
 
@@ -57,3 +62,7 @@ main = do args <- getArgs
     isValidVersion' mode version
       | mode == "s" = elem (read version :: Int) [1..2 ]
       | otherwise   = elem (read version :: Int) [1..13]
+
+    -- Helper function to make the palParParallel calls also parallel
+    parMapDeepSeq' :: (NFData y) => (x -> y) -> [x] -> [y]
+    parMapDeepSeq' f' = withStrategy (parList rdeepseq) . map f'
