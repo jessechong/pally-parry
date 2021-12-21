@@ -22,16 +22,16 @@ palParParallel word version lenls
   | version == "2"  = palParParallel2  word 0 ((length word) - 1)
   | version == "3"  = palParParallel3  word 0 ((length word) - 1) lenls
   | version == "4"  = palParParallel4  word 0 ((length word) - 1) lenls
-  | version == "5"  = palParParallel5  word 0 ((length word) - 1) 2 -- <-- Change this last number to change depth
-  | version == "6"  = palParParallel6  word 0 ((length word) - 1) 2 -- <-- Change this last number to change depth
+  | version == "5"  = palParParallel5  word 0 ((length word) - 1) 4 -- <-- Change this last number to change depth. Default = 4
+  | version == "6"  = palParParallel6  word 0 ((length word) - 1) 4 -- <-- Change this last number to change depth. Default = 4
   | version == "7"  = palParParallel7  word 0 ((length word) - 1)
   | version == "8"  = palParParallel8  word 0 ((length word) - 1)
   | version == "9"  = palParParallel9  word 0 ((length word) - 1)
   | version == "10" = palParParallel10 word 0 ((length word) - 1)
-  | version == "11" = palParParallel11 word 0 ((length word) - 1) 4 -- <-- Change this last number to change depth
-  | version == "12" = palParParallel12 word 0 ((length word) - 1) 4 -- <-- Change this last number to change depth
-  | version == "13" = palParParallel13 word 0 ((length word) - 1) 4 -- <-- Change this last number to change depth
-  | version == "14" = palParParallel14 word 0 ((length word) - 1) 4 -- <-- Change this last number to change depth
+  | version == "11" = palParParallel11 word 0 ((length word) - 1) 4 -- <-- Change this last number to change depth. Default = 4
+  | version == "12" = palParParallel12 word 0 ((length word) - 1) 4 -- <-- Change this last number to change depth. Default = 4
+  | version == "13" = palParParallel13 word 0 ((length word) - 1) 4 -- <-- Change this last number to change depth. Default = 4
+  | version == "14" = palParParallel14 word 0 ((length word) - 1) 4 -- <-- Change this last number to change depth. Default = 4
   | otherwise       = palParParallel1  word 0 ((length word) - 1)
 
 -- Version 1

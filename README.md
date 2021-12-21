@@ -45,3 +45,5 @@ References:
     - https://stackoverflow.com/questions/55662840/please-help-understanding-haskell-parallel
   - Global variables in Haskell article.
     - https://wiki.haskell.org/Global_variables
+  - Haskell docs on various RTS options.
+    - https://downloads.haskell.org/~ghc/7.8.3/docs/html/users_guide/runtime-control.html
