@@ -19,21 +19,27 @@ import System.Exit(die)
 main :: IO ()
 main = do args <- getArgs
           case args of
-            [filename, mode] -> do
+            [filename, mode, version] -> do
               content <- readFile filename
-              palParWrapper' content mode
+              let ls = lines content
+              palParWrapper' ls mode version
             _ -> do
               pn <- getProgName
-              die $ "Usage: " ++ pn ++ " <filename> <mode>"
+              die $ "Usage: " ++ pn ++ " <filename> <mode> <version>"
   where
-    palParWrapper' word mode
-      | any (\w -> not (isLower w)) word = do
-        die $ "Input word must consist of all lowercase alphabetical characters"
+    palParWrapper' ls mode version
+      | any (== True) [ isInvalid' word | word <- ls] = do
+        die $ "Input words must consist of all lowercase alphabetical characters"
+      | (isValidVersion mode version) == False = do
+        die $ "Version must be within the valid range (check the Sequential and Parallel .hs files)"
       | mode == "s" = do
-        let result = palParSequential word 1
-        putStrLn (show result)
+        mapM_ (\word -> putStrLn (show $ palParSequential word version)) ls
       | mode == "p" = do
-        let result = palParParallel word 0 ((length word) - 1)
-        putStrLn (show result)
+        mapM_ (\word -> putStrLn (show $ palParParallel word version (length ls))) ls
       | otherwise = do
         die $ "Mode must either be sequential 's' or parallel 'p'"
+
+    isInvalid' word = any (\w -> not (isLower w)) word
+    isValidVersion mode version
+      | mode == "s" = any (== True) [ version == (show sv) | sv <- [1..2]]
+      | otherwise   = any (== True) [ version == (show pv) | pv <- [1..15]]

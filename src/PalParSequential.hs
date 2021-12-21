@@ -15,8 +15,8 @@ import Data.Matrix
 
 -- Set ver to a different integer to change what algorithm gets used.
 palParSequential word ver
-  | ver == 1  = palParSequential1 word 0 ((length word) - 1)
-  | ver == 2  = palParSequential2 word (length word)
+  | ver == "1"  = palParSequential1 word 0 ((length word) - 1)
+  | ver == "2"  = palParSequential2 word (length word)
   | otherwise = palParSequential1 word 0 ((length word) - 1)
 
 -- palParSequential1 is based on an O(n^3) solution.

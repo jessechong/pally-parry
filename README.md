@@ -12,6 +12,8 @@ Commands to run:
 `stack exec PalPar-jlc2332-exe ./test/ValidCases/small2.txt p`  
 `stack exec PalPar-jlc2332-exe ./test/ValidCases/small2.txt p -- +RTS -ls -N2`  
 `threadscope PalPar-jlc2332-exe.eventlog`  
+`time stack exec PalPar-jlc2332-exe ./test/ValidCases/big3.txt p`  
+`time stack exec PalPar-jlc2332-exe ./test/ValidCases/big3.txt p -- +RTS -ls -N2`  
 
 Special thanks to Professor Edwards for the class and to Max Helman for TA'ing me over the project. I had a lot of fun learning about Haskell and working on the homeworks!  
 
@@ -29,9 +31,15 @@ References:
     - https://docs.haskellstack.org/en/stable/README/#start-your-new-project
   - General ThreadScope installation and usage.
     - https://wiki.haskell.org/ThreadScope
+  - Parallel library documentation.
+    - https://hackage.haskell.org/package/parallel-3.2.2.0/docs/Control-Parallel-Strategies.html
   - HUnit guide.
     - https://caiorss.github.io/Functional-Programming/haskell/UnitTest_Hunit.html#sec-1-3
   - Cabal FAQ for debugging dependency issues.
     - https://www.haskell.org/cabal/FAQ.html
   - StackOverflow discussion on threading.
     - https://stackoverflow.com/questions/62641707/what-is-ghc-doing-when-run-with-n-parallel-flag
+  - StackOverflow discussion on chunking.
+    - https://stackoverflow.com/questions/38175725/how-do-i-combine-the-benefits-of-parbuffer-and-parlistchunk
+  - StackOverflow post to resolve trouble using rdeepseq due to NFData typing error.
+    - https://stackoverflow.com/questions/55662840/please-help-understanding-haskell-parallel
