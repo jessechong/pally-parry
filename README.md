@@ -43,3 +43,5 @@ References:
     - https://stackoverflow.com/questions/38175725/how-do-i-combine-the-benefits-of-parbuffer-and-parlistchunk
   - StackOverflow post to resolve trouble using rdeepseq due to NFData typing error.
     - https://stackoverflow.com/questions/55662840/please-help-understanding-haskell-parallel
+  - Global variables in Haskell article.
+    - https://wiki.haskell.org/Global_variables
