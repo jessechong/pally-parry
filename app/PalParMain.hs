@@ -55,5 +55,5 @@ main = do args <- getArgs
     -- Helper function for checking if the version is valid
     isValidVersion' :: String -> String -> Bool
     isValidVersion' mode version
-      | mode == "s" = elem (read version) [1..2 ]
-      | otherwise   = elem (read version) [1..13]
+      | mode == "s" = elem (read version :: Int) [1..2 ]
+      | otherwise   = elem (read version :: Int) [1..13]
