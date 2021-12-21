@@ -60,7 +60,7 @@ main = do args <- getArgs
     isValidVersion' :: String -> String -> Bool
     isValidVersion' mode version
       | mode == "s" = elem (read version :: Int) [1..2 ]
-      | otherwise   = elem (read version :: Int) [1..13]
+      | otherwise   = elem (read version :: Int) [1..14]
 
     -- Helper function to make the palParParallel calls also parallel
     parMapDeepSeq' :: (NFData y) => (x -> y) -> [x] -> [y]

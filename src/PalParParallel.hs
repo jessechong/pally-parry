@@ -31,6 +31,7 @@ palParParallel word version lenls
   | version == "11" = palParParallel11 word 0 ((length word) - 1) 4 -- <-- Change this last number to change depth
   | version == "12" = palParParallel12 word 0 ((length word) - 1) 4 -- <-- Change this last number to change depth
   | version == "13" = palParParallel13 word 0 ((length word) - 1) 4 -- <-- Change this last number to change depth
+  | version == "14" = palParParallel14 word 0 ((length word) - 1) 4 -- <-- Change this last number to change depth
   | otherwise       = palParParallel1  word 0 ((length word) - 1)
 
 -- Version 1
