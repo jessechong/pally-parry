@@ -16,8 +16,7 @@ import Data.Char(isLower)
 import System.Environment(getArgs, getProgName)
 import System.Exit(die)
 
-import Control.Parallel(par, pseq)
-import Control.Parallel.Strategies(NFData, parList, rdeepseq, rpar, rseq, withStrategy, usingIO)
+import Control.Parallel.Strategies(NFData, parList, rdeepseq, withStrategy)
 
 {- This program must be given:
 1. a path to a file of all lower case Strings
