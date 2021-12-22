@@ -7,8 +7,7 @@
 
 -}
 
--- Exposing palParSequentialNaive/DP for testing purposes...
-module PalParSequential(palParSequential, palParSequentialNaive, palParSequentialDP) where
+module PalParSequential(palParSequential) where
 
 import PalParCommon(isPalindrome)
 import Data.Matrix(Matrix, getElem, identity, setElem)

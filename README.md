@@ -4,28 +4,36 @@ Name: Jesse Chong
 Uni: jlc2332  
 Final Project: Palindrome Partitioning (PalPar)  
 
-Hello, this is the readme file for my final project "Palindrome Partitioning" or in short "PalPar". This project was for Professor Edwards' COMS W4995 Parallel Functional Programming.  
+Hello, this is the readme file for my final project "Palindrome Partitioning" or in short "PalPar". This project was for Professor Edwards' COMS W4995 Parallel Functional Programming at Columbia University.
 
-Commands to run:  
+**Commands:**  
+General usage:  
+`stack clean && stack build`  
 `stack build`  
 `stack test`  
-`stack exec PalPar-jlc2332-exe ./test/ValidCases/small2.txt p`  
-`stack exec PalPar-jlc2332-exe ./test/ValidCases/small2.txt p -- +RTS -N4 -s`  
+Running against test cases:  
+`stack exec PalPar-jlc2332-exe ./test/ValidCases/alphabet8.txt s 1`  
+`stack exec PalPar-jlc2332-exe ./test/ValidCases/alphabet8.txt s 1 -- +RTS -N4 -s`  
+`stack exec PalPar-jlc2332-exe ./test/ValidCases/alphabet8.txt p1 1`  
+`stack exec PalPar-jlc2332-exe ./test/ValidCases/alphabet8.txt p1 1 -- +RTS -N4 -s`  
+`stack exec PalPar-jlc2332-exe ./test/ValidCases/alphabet8.txt p2 1`  
+`stack exec PalPar-jlc2332-exe ./test/ValidCases/alphabet8.txt p2 1 -- +RTS -N4 -s`  
+Viewing event log in Threadscope:  
 `threadscope PalPar-jlc2332-exe.eventlog`  
-`time stack exec PalPar-jlc2332-exe ./test/ValidCases/big3.txt p`  
-`time stack exec PalPar-jlc2332-exe ./test/ValidCases/big3.txt p -- +RTS -N4 -s`  
 
+**Acknowledgements:**  
 Special thanks to Professor Edwards for the class and to Max Helman for TA'ing me over the project. I had a lot of fun learning about Haskell and working on the homeworks!  
 
-References:  
+**References:**  
   - Course lectures:
     - http://www.cs.columbia.edu/~sedwards/classes/2021/4995-fall/io.pdf
     - http://www.cs.columbia.edu/~sedwards/classes/2021/4995-fall/laziness.pdf
+    - http://www.cs.columbia.edu/~sedwards/classes/2021/4995-fall/strategies.pdf
   - Class discussion board:
     - https://edstem.org/us/courses/13664/discussion/948167
   - Leetcode problem this project was based off of:
     - https://leetcode.com/problems/palindrome-partitioning-ii/
-  - Referred to GeeksForGeeks Python and C++ implementations to write the algorithm used in this project. Verified that my code was working by comparing results of my program to the Python solution given in the GeeksForGeeks page.
+  - Referenced the GeeksForGeeks Python and C++ implementations to write the algorithms used in this project. Verified that my code was working by comparing results of my program to the Python solution given in the page:
     - https://www.geeksforgeeks.org/palindrome-partitioning-dp-17/
   - Referred to Haskell docs to create this project directory.
     - https://docs.haskellstack.org/en/stable/README/#start-your-new-project
