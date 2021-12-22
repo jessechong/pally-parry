@@ -11,12 +11,10 @@ module Main where
 
 import PalParSequential(palParSequential)
 import PalParParallel(palParParallel)
-
+import Control.Parallel.Strategies(NFData, parList, rdeepseq, withStrategy)
 import Data.Char(isLower)
 import System.Environment(getArgs, getProgName)
 import System.Exit(die)
-
-import Control.Parallel.Strategies(NFData, parList, rdeepseq, withStrategy)
 
 {- This program must be given:
 1. a path to a file of all lower case Strings
