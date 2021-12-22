@@ -10,7 +10,8 @@ Class link - http://www.cs.columbia.edu/~sedwards/classes/2021/4995-fall/index.h
 
 **Commands:**  
 General usage:  
-`stack clean && stack build`  
+`stack clean && stack build && stack test`  
+`stack clean`  
 `stack build`  
 `stack test`  
 Running against test cases:  
