@@ -22,7 +22,7 @@ readFileHelper' filename mode version
     return result
   | otherwise = do
     word <- readFile filename
-    let result = palParParallel word version (length word)
+    let result = palParParallel word version
     return result
 
 testSequentialNaive1 :: Test

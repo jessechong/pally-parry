@@ -15,12 +15,12 @@ import Control.Parallel.Strategies(NFData, Strategy, parBuffer, parList, parList
                                    parMap, rdeepseq, rpar, rseq, withStrategy)
 
 -- Set version to a different integer to change what algorithm gets used.
-palParParallel :: String -> String -> Int -> Int
-palParParallel word version lenls
+palParParallel :: String -> String -> Int
+palParParallel word version
   | version == "1"  = palParParallel1  word 0 ((length word) - 1)
   | version == "2"  = palParParallel2  word 0 ((length word) - 1)
-  | version == "3"  = palParParallel3  word 0 ((length word) - 1) lenls
-  | version == "4"  = palParParallel4  word 0 ((length word) - 1) lenls
+  | version == "3"  = palParParallel3  word 0 ((length word) - 1)
+  | version == "4"  = palParParallel4  word 0 ((length word) - 1)
   | version == "5"  = palParParallel5  word 0 ((length word) - 1) 4 -- Change this last number to change depth. Default = 4
   | version == "6"  = palParParallel6  word 0 ((length word) - 1) 4 -- Change this last number to change depth. Default = 4
   | version == "7"  = palParParallel7  word 0 ((length word) - 1)
@@ -71,22 +71,20 @@ palParLoop2' word l m r = parCall1 `par` parCall2 `pseq` parCall1 + parCall2 + 1
     parCall2 = palParParallel2 word (m + 1) r
 
 -- Version 3
--- One layer of parallelization and chunking based on bottleneck size (which is around 16 characters)
-palParParallel3 :: String -> Int -> Int -> Int -> Int
-palParParallel3 word l r lenls
+-- One layer of parallelization and chunking based on bottleneck size (which starts around 16 characters)
+palParParallel3 :: String -> Int -> Int -> Int
+palParParallel3 word l r
   | l >= r = 0
   | (isPalindrome word l r) == True = 0
-  | lenls > 16 = minimum (withChunk' 16 rseq (\m -> palParLoop1' word l m r) [l..(r - 1)])
-  | otherwise  = minimum (parMap rpar (\m -> palParLoop1' word l m r) [l..(r - 1)])
+  | otherwise = minimum (withChunk' 4 rseq (\m -> palParLoop1' word l m r) [l..(r - 1)])
 
 -- Version 4
--- Two layers of parallelization and chunking based on bottleneck size (which is around 16 characters)
-palParParallel4 :: String -> Int -> Int -> Int -> Int
-palParParallel4 word l r lenls
+-- Two layers of parallelization and chunking based on bottleneck size (which starts around 16 characters)
+palParParallel4 :: String -> Int -> Int -> Int
+palParParallel4 word l r
   | l >= r = 0
   | (isPalindrome word l r) == True = 0
-  | lenls > 16 = minimum (withChunk' 16 rseq (\m -> palParLoop2' word l m r) [l..(r - 1)])
-  | otherwise  = minimum (parMap rpar (\m -> palParLoop2' word l m r) [l..(r - 1)])
+  | otherwise  = minimum (withChunk' 4 rseq (\m -> palParLoop2' word l m r) [l..(r - 1)])
 
 -- Version 5
 -- One layer of parallelization with depth

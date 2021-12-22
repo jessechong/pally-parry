@@ -43,9 +43,9 @@ main = do args <- getArgs
       | mode == "s" = do
         mapM_ (\word -> putStrLn (show $ palParSequential word version)) ls
       | mode == "p1" = do
-        mapM_ (\word -> putStrLn (show $ palParParallel word version (length ls))) ls
+        mapM_ (\word -> putStrLn (show $ palParParallel word version)) ls
       | mode == "p2" = do
-        let p2result = parMapDeepSeq' (\word -> show $ palParParallel word version (length ls)) ls
+        let p2result = parMapDeepSeq' (\word -> show $ palParParallel word version) ls
         mapM_ (\n -> putStrLn n) p2result
       | otherwise = do
         die $ "Mode must either be sequential 's' or parallel 'p'"
