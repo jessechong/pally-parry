@@ -6,6 +6,8 @@ Final Project: Palindrome Partitioning (PalPar)
 
 Hello, this is the readme file for my final project "Palindrome Partitioning" or in short "PalPar". This project was for Professor Edwards' COMS W4995 Parallel Functional Programming at Columbia University.
 
+Class link - http://www.cs.columbia.edu/~sedwards/classes/2021/4995-fall/index.html  
+
 **Commands:**  
 General usage:  
 `stack clean && stack build`  
@@ -18,7 +20,7 @@ Running against test cases:
 `stack exec PalPar-jlc2332-exe ./test/ValidCases/alphabet8.txt p1 1 -- +RTS -N4 -s`  
 `stack exec PalPar-jlc2332-exe ./test/ValidCases/alphabet8.txt p2 1`  
 `stack exec PalPar-jlc2332-exe ./test/ValidCases/alphabet8.txt p2 1 -- +RTS -N4 -s`  
-Viewing event log in Threadscope:  
+Viewing event log in ThreadScope:  
 `threadscope PalPar-jlc2332-exe.eventlog`  
 
 **Acknowledgements:**  
