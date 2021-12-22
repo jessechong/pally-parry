@@ -47,3 +47,5 @@ References:
     - https://wiki.haskell.org/Global_variables
   - Haskell docs on various RTS options.
     - https://downloads.haskell.org/~ghc/7.8.3/docs/html/users_guide/runtime-control.html
+  - "-Wall" option wasn't working until I added it under "library" in "package.yaml" like this post mentions:
+    - https://github.com/commercialhaskell/stack/issues/4576

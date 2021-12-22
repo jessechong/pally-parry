@@ -26,6 +26,7 @@ dependencies:
 
 library:
   source-dirs: src
+  ghc-options: -Wall
 
 executables:
   PalPar-jlc2332-exe:
