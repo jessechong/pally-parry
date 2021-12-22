@@ -11,8 +11,8 @@ module PalParParallel(palParParallel) where
 
 import PalParCommon(isPalindrome)
 import Control.Parallel(par, pseq)
-import Control.Parallel.Strategies(NFData, Strategy, parBuffer, parList, parListChunk, parMap,
-                                   rdeepseq, rpar, rseq, withStrategy)
+import Control.Parallel.Strategies(NFData, Strategy, parBuffer, parList, parListChunk,
+                                   parMap, rdeepseq, rpar, rseq, withStrategy)
 
 -- Set version to a different integer to change what algorithm gets used.
 palParParallel :: String -> String -> Int -> Int

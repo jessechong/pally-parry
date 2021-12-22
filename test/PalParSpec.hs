@@ -7,7 +7,8 @@
 
 -}
 
-import Test.HUnit
+import Test.HUnit(Test, Test(TestCase, TestLabel, TestList),
+                  assertEqual, runTestTT)
 
 import PalParSequential(palParSequential)
 import PalParParallel(palParParallel)
