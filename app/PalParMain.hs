@@ -35,7 +35,7 @@ main = do args <- getArgs
   where
     {- palParWrapper' is the function that handles input validation
     before it passes the given args over to the actual processing functions
-    such as palParSequential or palParParallel -}
+    such as palParSequential or palParParallel. -}
     palParWrapper' :: [String] -> String -> String -> IO ()
     palParWrapper' ls mode version
       | any (== True) [ isInvalid' word | word <- ls] = do

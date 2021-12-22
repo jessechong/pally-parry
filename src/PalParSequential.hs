@@ -10,13 +10,12 @@
 -- Exposing palParSequentialNaive/DP for testing purposes...
 module PalParSequential(palParSequential, palParSequentialNaive, palParSequentialDP) where
 
+import Data.Matrix(Matrix, getElem, identity, setElem)
 import PalParCommon(isPalindrome)
 
-import Data.Matrix(identity, getElem, setElem)
-
 {- Set "version" to a different integer to choose what sequential algorithm gets used.
-Version 1 is a O(n^3) naive solution.
-Version 2 is a O(n^2) dynamic programming solution.
+Version 1 is an O(n^3) naive solution.
+Version 2 is an O(n^2) dynamic programming solution.
 
 The below Haskell solutions were written after referencing the Python and C++ implementations on GeeksForGeeks:
   - https://www.geeksforgeeks.org/palindrome-partitioning-dp-17/
@@ -25,15 +24,15 @@ palParSequential :: String -> String -> Int
 palParSequential word version
   | version == "1"  = palParSequentialNaive word 0 ((length word) - 1)
   | version == "2"  = palParSequentialDP word (length word)
-  | otherwise = palParSequentialNaive word 0 ((length word) - 1)
+  | otherwise       = palParSequentialNaive word 0 ((length word) - 1)
 
 {- palParSequentialNaive, the O(n^3) solution.
 Past about 16 characters, this algorithm experiences immense slow down. -}
 palParSequentialNaive :: String -> Int -> Int -> Int
 palParSequentialNaive word l r
-  | l >= r = 0
+  | l >= r                          = 0
   | (isPalindrome word l r) == True = 0
-  | otherwise = minimum (map (\m -> palParInnerLoop' word l m r) [l..(r - 1)])
+  | otherwise                       = minimum (map (\m -> palParInnerLoop' word l m r) [l..(r - 1)])
   where
     -- Helper function to help with the recursion
     palParInnerLoop' :: String -> Int -> Int -> Int -> Int
@@ -42,35 +41,59 @@ palParSequentialNaive word l r
 -- palParSequentialDP, the O(n^2) solution.
 palParSequentialDP :: String -> Int -> Int
 palParSequentialDP word len = do
+  {- c[i]    = A list holding minimum number of cuts needed for each substring for the input string from 0 to i
+     p[i][j] = A matrix storing whether or not the substring from i to j is a palindrome.
+               If 1, then substring is a palindrome. Else, then not. -}
   let c = replicate (len) 0 -- Initiate list of cuts
       p = identity (len)    -- Initiate 2x2 identity matrix of substring lengths
-      p1 = foldl (outerLoop2 word len) p [2..(len)]
-      c1 = foldl (ceeOuterLoop2 p1) c [0..(len - 1)]
-  c1 !! (len - 1)
+      p' = foldl (palSubStringLoop' word len) p [2..(len)]
+      c' = foldl (palCutLoop' p') c [0..(len - 1)]
+  c' !! (len - 1) -- Returns the minimum cut value for the string
+
   where
-    outerLoop2 word len p l = foldl (innerLoop2 word l) p [0..(len - l)]
-    innerLoop2 word l p i = do
-      let j = i + l - 1
-      if l == 2 then do
+    {- Builds the matrix of substring palindrome conditions.
+       p   = palindrome matrix
+       len = length of the input string
+       l   = length of the substring     -}
+    palSubStringLoop' :: String -> Int -> Matrix Int -> Int -> Matrix Int
+    palSubStringLoop' word len p l = foldl (palSubStringInner' word l) p [0..(len - l)]
+
+    -- Checks whether the substring is a palindrome or not.
+    palSubStringInner' :: String -> Int -> Matrix Int -> Int -> Matrix Int
+    palSubStringInner' word l p i = do
+      let j = i + l - 1 -- Ending index for the substring
+      if l == 2 then do -- Length of the substring was 2, so just compare two characters
         setElem' (fromEnum $ ((word !! i) == (word !! j))) (i, j) p
       else do
         setElem' (fromEnum $ ((word !! i) == (word !! j) && ((getElem' (i + 1) (j - 1) p) == 1))) (i, j) p
 
-    ceeOuterLoop2 p1 c i
-      | getElem' 0 i p1 == 1 = update' i 0 c
-      | otherwise = foldl (ceeInnerLoop2 p1 i) (update' i (maxBound :: Int) c) [0..(i - 1)]
+    {- Builds the list of minimum cuts needed for the substrings.
+       p' = palindrome matrix
+       c  = palindrome cut list
+       l  = length of the substring -}
+    palCutLoop' :: Matrix Int -> [Int] -> Int -> [Int]
+    palCutLoop' p' c l
+      | getElem' 0 l p' == 1 = update' l 0 c -- The substring was a palindrome. No cuts needed; set to 0
+      | otherwise            = foldl (palCutInner' p' l) (update' l (maxBound :: Int) c) [0..(l - 1)]
 
-    ceeInnerLoop2 p1 i c j = do
-      if ((getElem' (j + 1) i p1) == 1) && ((1 + (c !! j)) < (c !! i)) then do
-        update' i (1 + (c !! j)) c
+    -- Counts the number of cuts for each substring
+    palCutInner' :: Matrix Int -> Int -> [Int] -> Int -> [Int]
+    palCutInner' p' l c j = do
+      if ((getElem' (j + 1) l p') == 1) && ((1 + (c !! j)) < (c !! l)) then do
+        update' l (1 + (c !! j)) c
       else do
         c
 
-    -- Helper functions to make matrix functions getElem and setElem use zero based indexing
+    {- Modification on the Matrix getElem function to use zero based indexing.
+       https://hackage.haskell.org/package/matrix-0.3.6.1/docs/Data-Matrix.html#v:getElem -}
+    getElem' :: Int -> Int -> Matrix a -> a
     getElem' x y m = getElem (x + 1) (y + 1) m
-    setElem' a (p1, p2) m = setElem a (p1 + 1, p2 + 1) m
 
-    -- Helper function that inserts an element into a list based on the given index
-    update' i v l = (take i l) ++ [v] ++ (tail $ drop i l)
+    {- Modification on the Matrix setElem function to use zero based indexing.
+       https://hackage.haskell.org/package/matrix-0.3.6.1/docs/Data-Matrix.html#v:setElem -}
+    setElem' :: a -> (Int, Int) -> Matrix a -> Matrix a
+    setElem' a (x, y) m = setElem a (x + 1, y + 1) m
 
-
+    -- Helper function that updates the given list with the given element at the given index
+    update' :: Int -> a -> [a] -> [a]
+    update' i v ls = (take i ls) ++ [v] ++ (tail $ drop i ls)
