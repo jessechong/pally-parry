@@ -10,10 +10,10 @@ Commands to run:
 `stack build`  
 `stack test`  
 `stack exec PalPar-jlc2332-exe ./test/ValidCases/small2.txt p`  
-`stack exec PalPar-jlc2332-exe ./test/ValidCases/small2.txt p -- +RTS -ls -N2`  
+`stack exec PalPar-jlc2332-exe ./test/ValidCases/small2.txt p -- +RTS -N4 -s`  
 `threadscope PalPar-jlc2332-exe.eventlog`  
 `time stack exec PalPar-jlc2332-exe ./test/ValidCases/big3.txt p`  
-`time stack exec PalPar-jlc2332-exe ./test/ValidCases/big3.txt p -- +RTS -ls -N2`  
+`time stack exec PalPar-jlc2332-exe ./test/ValidCases/big3.txt p -- +RTS -N4 -s`  
 
 Special thanks to Professor Edwards for the class and to Max Helman for TA'ing me over the project. I had a lot of fun learning about Haskell and working on the homeworks!  
 

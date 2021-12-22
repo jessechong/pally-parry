@@ -59,7 +59,7 @@ test-suite PalPar-jlc2332-test
       Paths_PalPar_jlc2332
   hs-source-dirs:
       test
-  ghc-options: -threaded -rtsopts -with-rtsopts=-N -Wall
+  ghc-options: -Wall -threaded -eventlog -rtsopts -with-rtsopts=-N
   build-depends:
       HUnit
     , PalPar-jlc2332

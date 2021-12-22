@@ -9,23 +9,75 @@
 
 import Test.HUnit
 
-import PalParSequential(palParSequentialNaive)
+import PalParSequential(palParSequential)
 import PalParParallel(palParParallel)
 
+readFileHelper' :: String -> String -> String -> IO (Int)
+readFileHelper' filename mode version
+  | mode == "s" = do
+    word <- readFile filename
+    let result = palParSequential word version
+    return result
+  | otherwise = do
+    word <- readFile filename
+    let result = palParParallel word version (length word)
+    return result
 
-readFileHelper' filename func = do
-  content <- readFile filename
-  let ls = lines content
-  return [16]
-
+testSequentialNaive1 :: Test
 testSequentialNaive1 = TestCase $ do
-  let actual   = readFileHelper' "./ValidCases/big1.txt" palParSequentialNaive
-      expected = [16]
-  assertEqual "Sequential Naive 1" actual expected
+  let expected = 0
+  actual <- (readFileHelper' "./test/ValidCases/alphabet1.txt" "s" "1")
+  assertEqual "testSequentialNaive1" actual expected
 
-testlist = TestList [TestLabel "testSequentialNaive1" testSequentialNaive1]
+testSequentialNaive2 :: Test
+testSequentialNaive2 = TestCase $ do
+  let expected = 1
+  actual <- (readFileHelper' "./test/ValidCases/alphabet2.txt" "s" "1")
+  assertEqual "testSequentialNaive2" actual expected
+
+testSequentialNaive3 :: Test
+testSequentialNaive3 = TestCase $ do
+  let expected = 7
+  actual <- (readFileHelper' "./test/ValidCases/alphabet8.txt" "s" "1")
+  assertEqual "testSequentialNaive3" actual expected
+
+testSequentialNaive4 :: Test
+testSequentialNaive4 = TestCase $ do
+  let expected = 3
+  actual <- (readFileHelper' "./test/ValidCases/medium1.txt" "s" "1")
+  assertEqual "testSequentialNaive4" actual expected
+
+testSequentialNaive5 :: Test
+testSequentialNaive5 = TestCase $ do
+  let expected = 7
+  actual <- (readFileHelper' "./test/ValidCases/medium2.txt" "s" "1")
+  assertEqual "testSequentialNaive5" actual expected
+
+testSequentialNaive6 :: Test
+testSequentialNaive6 = TestCase $ do
+  let expected = 6
+  actual <- (readFileHelper' "./test/ValidCases/medium3.txt" "s" "1")
+  assertEqual "testSequentialNaive6" actual expected
+
+testSequentialNaive7 :: Test
+testSequentialNaive7 = TestCase $ do
+  let expected = 0
+  actual <- (readFileHelper' "./test/ValidCases/palindrome1.txt" "s" "1")
+  assertEqual "testSequentialNaive7" actual expected
+
+testList :: Test
+testList = TestList [TestLabel "testSequentialNaive1" testSequentialNaive1,
+                     TestLabel "testSequentialNaive2" testSequentialNaive2,
+                     TestLabel "testSequentialNaive3" testSequentialNaive3,
+                     TestLabel "testSequentialNaive4" testSequentialNaive4,
+                     TestLabel "testSequentialNaive5" testSequentialNaive5,
+                     TestLabel "testSequentialNaive6" testSequentialNaive6,
+                     TestLabel "testSequentialNaive7" testSequentialNaive7]
 
 main :: IO ()
 main = do
-  runTestTT testlist
+  {- Doing this throw-away bind because of the following warning:
+       " A do-notation statement discarded a result of type ‘Counts’
+         Suppress this warning by saying ‘_ <- runTestTT testList’ "   -}
+  _ <- runTestTT testList
   return ()

@@ -45,10 +45,11 @@ tests:
     main:                PalParSpec.hs
     source-dirs:         test
     ghc-options:
+    - -Wall
     - -threaded
+    - -eventlog
     - -rtsopts
     - -with-rtsopts=-N
-    - -Wall
     dependencies:
     - PalPar-jlc2332
     - HUnit
